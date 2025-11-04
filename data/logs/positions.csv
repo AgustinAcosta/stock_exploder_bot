@@ -1,0 +1,2 @@
+symbol,status,created_ts,updated_ts,entry_price,avg_price,qty_usd,adds_done,stop,tp1,tp2,partial_taken,notes
+COMP,OPEN,2025-11-04T12:55:11,2025-11-04T12:55:11,8.475,8.475,100.0,0,7.797,9.3225,10.17,False,

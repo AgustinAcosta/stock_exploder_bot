@@ -1,0 +1,6 @@
+pandas
+numpy
+yfinance
+pyyaml
+python-telegram-bot>=13.0
+pytz

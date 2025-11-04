@@ -1,0 +1,55 @@
+provider: "yfinance"
+timezone: "America/Chicago"
+
+# Telegram
+telegram_token: "8328797851:AAEDiCczXlXMXJ8pw-AfWefORIeuznPDOVg"
+telegram_chat_id: "1747305425"
+
+# Universe base (low-price habituales). El scanner elegirá los mejores del día.
+base_universe:
+  - BBAI - GFAI - WISA - CXAI - SOUN - IONQ - MARK - SNTI - CXAI
+  - CEI - HUSA - IMPP - INDO - UAVS - SUNW
+  - TNXP - CRTD - BBLG - GTBP - ADTX - SYBX - AVTX - SHPH
+  - RIOT - MARA - HUT - BTBT - BKKT
+  - NBY - FFIE - GOEV - EVGO - SOLO - KOSS - TOPS - BBIG - AI - PLTR - CURLF
+  - CANO - AGBA - SOPA - QMCO - NVOS - AERC - VERB - TTOO - GROM
+
+scan:
+  premarket_start_local: "07:00"   # hora Chicago
+  market_open_local: "08:30"       # hora Chicago
+  interval_seconds: 60             # loop principal
+
+filters:
+  price_min: 0.5
+  price_max: 10.0
+  min_premarket_rvol: 1.5          # relativo a vol medio reciente
+  min_gap_pct: 3.0                 # % gap vs. close previo
+  top_n_watchlist: 20              # cuántos deja para el día
+
+signals:
+  explode_threshold: 80            # 0-100
+  sl_pct: 5                        # SL por porcentaje
+  tp1_pct: 10                      # TP1 por porcentaje
+  max_active_trades: 8
+
+logging:
+  log_csv: "data/logs/signals.csv"
+
+updates:
+  min_change_pct: 2.0        # re-alerta si sube >= 2% vs última alerta guardada
+  realert_cooldown_min: 15   # o si pasaron >= 15 minutos desde la última alerta de ese ticker
+  top_n: 5                   # cuántos tickers mandar por ciclo
+  scan_interval_sec: 120     # ya lo dejaste a 2 minutos
+
+capital:
+  per_stock_usd: 100
+
+risk:
+  capital_per_trade_usd: 100
+  add_on_usd: 50
+  max_adds: 1
+  stop_loss_pct: 8        # 8% bajo el precio promedio
+  tp1_pct: 10             # take parcial 50%
+  tp2_pct: 20             # take total
+  add_zone_low_pct: -6    # -6% vs entrada
+  add_zone_high_pct: -3   # -3% vs entrada
